@@ -18,7 +18,7 @@ This is my own build of my group's game concept. Every commit in this repository
 | ORM and migrations | Sequelize 6 with sequelize-cli |
 
 ## Setup
- ```bash
+ 
  git clone [repository-url]
  cd [folder-name]
  npm install
