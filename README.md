@@ -18,10 +18,10 @@ This is my own build of my group's game concept. Every commit in this repository
 | ORM and migrations | Sequelize 6 with sequelize-cli |
 
 ## Setup
-
-git clone [repository-url]
-cd [folder-name]
-npm install
+ ```bash
+ git clone [repository-url]
+ cd [folder-name]
+ npm install
 
 Copy .env.example to .env, then put your own PostgreSQL password in DB_PASSWORD.
 
