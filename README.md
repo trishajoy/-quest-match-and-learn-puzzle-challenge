@@ -1,92 +1,57 @@
 # Tile Quest: Match and Learn Puzzle Challenge API
 
-Backend API for Tile Quest: Match and Learn Puzzle Challenge, an educational game for the SorSU Bulan Campus Library. CS 313 Software Engineering 1, A.Y. 2026-2027.
+Backend API for Tile Quest: Match and Learn Puzzle Challenge — an educational tile-matching game focused on the Respiratory System. Software Engineering 1, A.Y. 2026-2027.
 
-- Developer: Trisha Joy Gutierrez (@trishajoy)
+## Team Information
+- Developers: Trisha Joy Gutierrez, Gian Carlo Erivera, Donnalyn Mae Nares, Eron Hona
 - Course/Section: BSCS 3-1
-- Group and game concept: Group 4 — Tile Quest: Match and Learn is an educational game where players match the required tiles, complete puzzles, and answer quizzes to pass each level. Players earn points and advance to higher levels while improving their memory, focus, and knowledge.
+- Game Concept: Tile Quest is a learning game where players match tiles showing parts of the respiratory system, complete puzzles, and answer quiz questions. Players earn points, unlock new levels, and reinforce their knowledge of how the respiratory system works.
 
-This is my own build of my group's game concept. Every commit in this repository was made by me, with Git, on my own computer or in my own Codespace.
+## Tech Stack
+Runtime        : Node.js 22 LTS or newer
+Web Framework : Express 5
+Database      : PostgreSQL 16 or newer
+ORM           : Sequelize 6 + sequelize-cli
 
-## Tech stack
-
-| Layer | Tool |
-|-------|------|
-| Runtime | Node.js 22 LTS or newer |
-| Web framework | Express 5 |
-| Database | PostgreSQL 16 or newer |
-| ORM and migrations | Sequelize 6 with sequelize-cli |
-
-## Setup
-
-git clone [repository-url]
-cd [folder-name]
+## How to Run
+git clone https://github.com/trishajoy/quest-match-and-learn-puzzle-challenge.git
+cd quest-match-and-learn-puzzle-challenge
 npm install
 
-Copy .env.example to .env, then put your own PostgreSQL password in DB_PASSWORD.
+Create a .env file using .env.example as your template, then update your database password.
 
-npm run db:create    (first time only)
+npm run db:create
 npm run db:migrate
 npm run db:seed
 npm run db:check
 npm run dev
 
-## Environment variables
+## Environment Variables
+DB_HOST     = 127.0.0.1
+DB_PORT     = 5432
+DB_NAME     = tile_quest
+DB_USER     = postgres
+DB_PASSWORD = your_password_here
+PORT        = 3001
+NODE_ENV    = development
 
-| Key | Example | Purpose |
-|-----|---------|---------|
-| NODE_ENV | development | Which config block to use |
-| PORT | 3001 | Port the API listens on |
-| DB_HOST | 127.0.0.1 | PostgreSQL host |
-| DB_PORT | 5432 | PostgreSQL port |
-| DB_NAME | tile_quest | Database name |
-| DB_USER | postgres | Database user |
-| DB_PASSWORD | (your own) | Database password. Never commit this. |
-| HUB_API_KEY | dev-hub-key | Key the Library Game Hub sends to read results. |
+## API Endpoints
+GET    /api/v1/health              Check if API is running
+GET    /api/v1/game-info           Get game details
+GET    /api/v1/player/:id          View player profile and progress
+POST   /api/v1/player              Create new player account
+PUT    /api/v1/player/:id          Update player score and progress
+GET    /api/v1/level/:id           Get level details and tile layout
+GET    /api/v1/level/:id/questions Get quiz questions for a level
+POST   /api/v1/question/:id/validate Submit and check answer
+GET    /api/v1/leaderboard         View top scores
 
-## Endpoints (Hub Contract v1.2)
+## Game Completion
+A player completes a level by correctly matching all tile pairs and answering the quiz questions. The game is fully completed when all levels are finished. You can still move forward even if you get some questions wrong — just try again!
 
-Base URL: http://localhost:3001/api/v1
-
-| Method | Path | Purpose | Success |
-|--------|------|---------|---------|
-| GET | /health | Is the API up and can it reach the database? | 200 (503 when the database is down) |
-| GET | /game-info | Slug, name, group, developer, description, player limits, version | 200 |
-| GET | /player/:id | Get player profile, progress, score, lives and current level | 200 |
-| POST | /player | Register new player | 201 |
-| PUT | /player/:id | Update player progress, score and lives | 200 |
-| GET | /level/:id | Load level details: tiles, difficulty, time limit | 200 |
-| GET | /level/:id/questions | Get quiz questions for a specific level | 200 |
-| POST | /question/:id/validate | Submit answer and check correctness | 200 |
-| GET | /leaderboard | Get ranked top player scores | 200 |
-| POST | /admin/questions | Add or update quiz questions | 200 |
-| POST | /hub/sync-github | Trigger synchronization with GitHub library repo | 200 |
-| GET | /results | Finished games, every player, and the top 3 | 200 (401 without the key) |
-
-## What "completed" means in my game
-
-A player completes the game when they have successfully finished all levels — matching every tile pair and answering the quiz for each level. Players can still progress even if some answers are wrong, but they must complete the puzzle and pass the quiz to unlock the next level.
-
-## Tables
-
-players — Player accounts and profile data
-
-admins — Administrator credentials and access levels
-
-levels — Level configurations: tile layouts, difficulty, time limits
-
-questions — Quiz questions, answer options, and correct answers per level
-
-game_progress — Player's saved progress: completed levels, scores, lives remaining
-
-## Database scripts
-
-| Command | What it does |
-|---------|-------------|
-| npm run db:migrate | Runs migrations that have not run yet |
-| npm run db:migrate:status | Lists every migration as up or down |
-| npm run db:seed | Loads the seed data |
-| npm run db:check | Counts the rows in every table |
-| npm run db:reset | Empties the database, rebuilds every table and reloads the seed data |
-| npm run dev | Starts the development server |
-| npm run check | Runs the same automatic check that GitHub runs after every push |
+## Database Tables
+players          Player accounts and game progress
+levels           Level details, tile layouts, and difficulty
+tiles            Tile images, names, and matching pairs
+questions        Quiz questions and correct answers per level
+scores            Player scores, points earned, and level completion status
