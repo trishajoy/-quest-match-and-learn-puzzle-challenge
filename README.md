@@ -2,7 +2,7 @@
 
 Backend API for Tile Quest: Match and Learn Puzzle Challenge, an educational game for the SorSU Bulan Campus Library. CS 313 Software Engineering 1, A.Y. 2026-2027.
 
-- Developer: Trisha Joy Gutierrez (@trishajoy), Gian Carlo Erivera, Donnalyn Mae Nares (@donnalynnares-ux), Eron Hona
+- Developer: Trisha Joy Gutierrez (@trishajoy)
 - Course/Section: BSCS 3-1
 - Group and game concept: Group 4 — Tile Quest: Match and Learn is an educational game where players match the required tiles, complete puzzles, and answer quizzes to pass each level. Players earn points and advance to higher levels while improving their memory, focus, and knowledge.
 
